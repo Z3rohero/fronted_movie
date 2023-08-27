@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import { Editar } from "./Editar";
 import { useState } from "react";
 export const Listado = ({listado,setListado}) => {
 
   
-    //const [listado, setListado] = useState([]);
+    const [editar, setEditar] = useState(0);
 
 
    const getPeliculas = () => {
@@ -42,8 +43,20 @@ export const Listado = ({listado,setListado}) => {
                 <h3 className="title">{datos.titulo}</h3>
                 <p className="description">{datos.descripcion}</p>
 
-                <button className="edit">Editar</button>
+                <button className="edit" onClick = { ()=> {
+                    setEditar(datos.id);
+                    console.log(editar);
+                }}>Editar</button>
                 <button className="delete" onClick={ () => borra(datos.id)}>Borrar</button>
+            
+                 {/* Dato curiso con los tenario no me importa
+                   con && si me importa la etiqueta  */}
+
+                 {
+                 editar === datos.id && (
+                    <Editar/>
+                 ) 
+                 }
             </article>
             );
         }):<h3 className="title">No hay peliculas</h3>
