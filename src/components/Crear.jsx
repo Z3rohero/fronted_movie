@@ -32,7 +32,7 @@ export const Crear = ({setListado}) => {
 
         setListado(elementos =>{
           //para copia el array que ya estaba
-            return [...elementos,datostate];
+            return [datostate,...elementos];
         });
 
         //guarda en el almacenamiento local 

@@ -10,6 +10,8 @@ export const Listado = ({listado,setListado}) => {
         let movie = JSON.parse(localStorage.getItem("datos"));
         setListado(movie);
 
+        return movie;
+
     };
 
     useEffect(() => {
@@ -17,6 +19,18 @@ export const Listado = ({listado,setListado}) => {
         getPeliculas();
     }, []);//cuando cargue una sola la vez componente
     
+
+
+    const borra = (id) => {
+       //conseguir los datos almacenados
+       let movie  = getPeliculas()
+         //filtrar los datos que no coincidan con el id
+         let nuevos_datos = movie.filter(datos => datos.id !== parseInt(id));
+         //Actualizar los datos
+         setListado(nuevos_datos);
+        localStorage.setItem("datos",JSON.stringify(nuevos_datos)); 
+
+    }
 
 
       
@@ -29,7 +43,7 @@ export const Listado = ({listado,setListado}) => {
                 <p className="description">{datos.descripcion}</p>
 
                 <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
+                <button className="delete" onClick={ () => borra(datos.id)}>Borrar</button>
             </article>
             );
         }):<h3 className="title">No hay peliculas</h3>
