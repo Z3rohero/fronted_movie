@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { guardarDatosLocal } from "../helpers/GuardarEnStorage";
-export const Crear = () => {
+export const Crear = ({setListado}) => {
 
     const [datos,setDatos ] = useState({
         id: "", 
@@ -28,8 +28,12 @@ export const Crear = () => {
             descripcion
         };
 
-        console.log(datostate);
         setDatos(datostate);
+
+        setListado(elementos =>{
+          //para copia el array que ya estaba
+            return [...elementos,datostate];
+        });
 
         //guarda en el almacenamiento local 
         // la funcion JSON.stringify convierte un objeto o valor de JavaScript en una cadena de texto JSON

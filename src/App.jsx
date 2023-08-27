@@ -4,7 +4,11 @@ import './App.css'
 import { Listado } from './components/Listado'
 import { Buscar } from './components/Buscar'
 import { Crear } from './components/Crear'
+import { useState } from 'react'
 function App() {
+
+    const [listado, setListado] = useState([]);
+
 
   return (<div className="layout">
         {/*<!--Cabecera-->*/}
@@ -29,13 +33,13 @@ function App() {
         {/*Contenido principal*/}
         <section id="content" className="content">
             {/*aqui van las peliculas*/}
-            <Listado /> 
+            <Listado listado={listado} setListado={setListado}/> 
         </section>
 
         {/*Barra lateral*/}
         <aside className="lateral">
            <Buscar />
-           <Crear />
+           <Crear  setListado = {setListado}/>
         </aside>
 
         {/*Pie de página*/}

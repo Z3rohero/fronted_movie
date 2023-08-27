@@ -1,41 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+export const Listado = ({listado,setListado}) => {
 
-export const Listado = () => {
+  
+    //const [listado, setListado] = useState([]);
 
+
+   const getPeliculas = () => {
+        let movie = JSON.parse(localStorage.getItem("datos"));
+        setListado(movie);
+
+    };
+
+    useEffect(() => {
+
+        getPeliculas();
+    }, []);//cuando cargue una sola la vez componente
+    
+
+
+      
     return (
-        <>
-          <article className="peli-item">
-                <h3 className="title">Desarrollo web</h3>
-                <p className="description">zerohero</p>
+        <> 
+        {listado && listado.length > 0 ? listado.map((datos) => {
+            return (
+                <article  key={datos.id} className="peli-item">
+                <h3 className="title">{datos.titulo}</h3>
+                <p className="description">{datos.descripcion}</p>
 
                 <button className="edit">Editar</button>
                 <button className="delete">Borrar</button>
             </article>
-
-            <article className="peli-item">
-                <h3 className="title">Desarrollo web</h3>
-                <p className="description">zerohero</p>
-
-                <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
-            </article>
-
-            <article className="peli-item">
-                <h3 className="title">Desarrollo web</h3>
-                <p className="description">zerohero</p>
-
-                <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
-            </article>
-
-            <article className="peli-item">
-                <h3 className="title">Desarrollo web</h3>
-                <p className="description">zerohero</p>
-
-                <button className="edit">Editar</button>
-                <button className="delete">Borrar</button>
-            </article>
-
+            );
+        }):<h3 className="title">No hay peliculas</h3>
+    
+    
+    }
         
         </>
      )
